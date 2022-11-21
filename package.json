@@ -1,0 +1,11 @@
+{
+  "name": "fatec-eventos",
+  "version": "1.0.0",
+  "main": "js/index.js",
+  "author": "Gustavo Felix",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
+}
