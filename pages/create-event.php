@@ -4,6 +4,8 @@
 
     <section>
       <form method="post" action="../controller/EventController.php">
+        <input type="hidden" name="create_event" value="1" />
+
         <div role="group">
           <label for="event_name">Nome do Evento</label>
           <input type="text" name="event_name" id="event_name" />

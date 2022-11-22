@@ -17,6 +17,11 @@ class Database
     return $this->conn->query($query);
   }
 
+  public function fetch($query)
+  {
+    
+  }
+
   public function insert($values, $table)
   {
     $query = "INSERT INTO $table (" . $this->utils->serialize_fields($values) . ") VALUES (" . $this->utils->serialize_values($values) . ");";
@@ -34,13 +39,20 @@ class Database
 
   }
 
-  public function select($values, $table, $where = "")
+  public function select($fields, $table, $where = "")
   {
-    $fields = $this->utils->serialize_fields($values);
+    $query = "SELECT " . implode(",", $fields) . " FROM $table " . ($where ? "WHERE $where" : "");
 
-    $query = "SELECT $fields FROM $table WHERE $where";
+    $results = $this->execute($query);
+    $records = [];
+    $count = 0;
 
-    return $this->execute($query);
+     while ($fetch = $results->fetch_assoc()) {
+      $records[$count] = $fetch;
+      $count++;
+    }
+
+    return $records;
   }
 }
 

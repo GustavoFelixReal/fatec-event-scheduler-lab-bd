@@ -1,7 +1,9 @@
 <?php
+  error_reporting(E_ERROR | E_PARSE);
+
   $server = "127.0.0.1";
   $user = "root";
-  $password = "";
+  $password = "root";
   $database = "fatec_eventos";
 
   $connection = mysqli_connect($server, $user, $password, $database);

@@ -25,6 +25,7 @@ if ($_POST['create_event']) {
     'event_date' => $_POST['event_date'],
     'event_time' => $_POST['event_time'],
     'event_location' => $_POST['event_location'],
+    'event_created_at' => Date('Y-m-y H:i:s')
   ];
 
   if ($db->insert($event, 'events')) {
@@ -39,9 +40,9 @@ if ($_POST['create_event']) {
 if ($_POST['list_events']) {
   $fields = ['event_id', 'event_name', 'event_date'];
 
-  $events = $db->select($where, 'events', '');
+  $events = $db->select($fields, 'events', '');
 
-  echo $events;
+  echo json_encode($events);
   exit;
 }
 
