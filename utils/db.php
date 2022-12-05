@@ -22,5 +22,15 @@ class DBUtils
 
     return $serialized;
   }
+
+  public function serialize_fields_and_values($fields) {
+    $serialized = "";
+
+    foreach ($fields as $key => $value) {
+      $serialized .= "$key = '$value'" . (count($fields) - 1 == array_search($key, array_keys($fields)) ? '' : ',');
+    }
+
+    return $serialized;
+  }
 }
 ?>

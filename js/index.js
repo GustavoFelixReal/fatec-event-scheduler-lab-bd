@@ -1,19 +1,42 @@
-import { getEvents } from "./events.js";
+import { initDeleteEvent, initEvent, initEvents, initReportsEvents, initViewEvent } from "./events.js";
+import "../styles/global.css";
 
-;(async () => {
-  const events = await getEvents();
+(async () => {
+  let path = window.location.pathname.split(
+    "/fatec-event-scheduler-lab-bd/pages/"
+  )[1];
 
-  const table = document.querySelector('tbody');
+  switch (path) {
+    case "home.php": {
+      await initReportsEvents();
+      break;
+    }
+    case "events.php": {
+      await initEvents();
+      break;
+    }
+    case "edit-event.php": {
+      const [_trash, params] = window.location.search?.split("?");
+      const [_paramName, value] = params?.split("=");
 
-  events.forEach(event => {
-    const html = `
-      <tr>
-        <td>${event.event_id}</td>
-        <td>${event.event_name}</td>
-        <td>${event.event_date}</td>
-      </tr>
-    `;
-    
-    table.insertAdjacentHTML('beforeend', html);
-  })
+      await initEvent(value);
+      break;
+    }
+    case "delete-event.php": {
+      const [_trash, params] = window.location.search?.split("?");
+      const [_paramName, value] = params?.split("=");
+
+      await initDeleteEvent(value);
+      break;
+    }
+    case "view-event.php": {
+      const [_trash, params] = window.location.search?.split("?");
+      const [_paramName, value] = params?.split("=");
+
+      await initViewEvent(value);
+      break;
+    }
+    default: {
+    }
+  }
 })();
