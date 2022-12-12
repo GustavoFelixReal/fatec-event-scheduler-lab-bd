@@ -1,4 +1,4 @@
 <?php
-  header('Location: ' . './pages/events.php');
+  header('Location: ' . './pages/home.php');
   die();
 ?>
